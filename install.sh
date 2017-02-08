@@ -6,9 +6,11 @@
 
 ########## Variables
 
+set -e
+
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="bashrc vimrc fonts.conf"    # list of files/folders to symlink in homedir
+files="bashrc vimrc fonts.conf tmux.conf"    # list of files/folders to symlink in homedir
 
 ##########
 
@@ -29,3 +31,19 @@ for file in $files; do
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
+
+function install_vim {
+    echo
+    read -p "Install vim plugins now [Yy]?" -n 1 -r
+    echo    # (optional) move to a new line
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        vundle_dir="${HOME}/.vim/bundle/Vundle.vim"
+        if [ ! -d "$vundle_dir" ]; then
+            git clone https://github.com/VundleVim/Vundle.vim.git "$vundle_dir"
+        fi
+        vim +PluginInstall +qall
+    fi
+}
+
+install_vim
