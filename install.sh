@@ -14,29 +14,49 @@ echo "...done"
 echo "Changing to the $dotfiles_dir directory"
 cd $dotfiles_dir
 echo "...done"
-
+echo
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
 echo "Moving any existing dotfiles from ~ to $olddir"
 for file in $files; do
-    if [ -f "${HOME}/.${file}" ]; then
+    if [ -f "${HOME}/.${file}" ] && [ ! -f "${HOME}/dotfiles_old/.${file}" ]; then
+        echo "Moving ${HOME}/.${file} to ~/dotfiles_old/"
         mv "${HOME}/.${file}" ~/dotfiles_old/
     fi
-    echo "Creating symlink to $file in home directory."
-    ln -s "$dotfiles_dir/$file" ~/.$file
+    if [ ! -L "${HOME}/.${file}" ]; then
+        echo "Creating symlink to $file in home directory."
+        ln -s "$dotfiles_dir/$file" "${HOME}/.${file}"
+    fi
 done
+echo "...done"
 
 function install_vim {
     echo
-    read -p "Install vim plugins now [Yy]?" -n 1 -r
+    read -p "install vim plugins now [Yy]?" -n 1 -r
     echo    # (optional) move to a new line
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
-        vundle_dir="${HOME}/.vim/bundle/Vundle.vim"
+        vundle_dir="${HOME}/.vim/bundle/vundle.vim"
         if [ ! -d "$vundle_dir" ]; then
-            git clone https://github.com/VundleVim/Vundle.vim.git "$vundle_dir"
+            git clone https://github.com/vundlevim/vundle.vim.git "$vundle_dir"
         fi
-        vim +PluginInstall +qall
+        vim +plugininstall +qall
+    fi
+}
+
+function install_tpm {
+    echo
+    read -p "install tmux plugins now [Yy]?" -n 1 -r
+    echo    # (optional) move to a new line
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        tpm_dir="${HOME}/.tmux/plugins/tpm"
+        if [ ! -d "$tpm_dir" ]; then
+            git clone https://github.com/tmux-plugins/tpm "$tpm_dir"
+        fi
+        ~/.tmux/plugins/tpm/bin/install_plugins
+        ~/.tmux/plugins/tpm/bin/update_plugins all
     fi
 }
 
 install_vim
+install_tpm
