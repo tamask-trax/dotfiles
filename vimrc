@@ -1,4 +1,5 @@
 set nocompatible              " be iMproved, required
+set shell=/bin/bash
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -17,7 +18,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
-Plugin 'wincent/command-t.git'
+Plugin 'Vimjas/vim-python-pep8-indent'
+
 " git repos on your local machine (i.e. when working on your own plugin)
 "Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
@@ -44,16 +46,24 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-set number
-
-filetype plugin indent on
-" show existing tab with 4 spaces width
-set tabstop=4
-" when indenting with '>', use 4 spaces width
-set shiftwidth=4
-" On pressing tab, insert 4 spaces
-set expandtab
 
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" binds
+nnoremap <silent> <F5> :!./%<CR>
+
+" vim-airline show buffers:
+let g:airline#extensions#tabline#enabled = 1
+
+"toggle NERDTree:
+nmap <F6> :NERDTreeToggle<CR>
+
+" bind buffers
+map gn :bn<cr>
+map gp :bp<cr>
+map gd :bd<cr>
+
+" show linenumbers
+set number
