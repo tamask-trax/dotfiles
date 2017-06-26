@@ -29,7 +29,7 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 "Plugin 'user/L9', {'name': 'newL9'}
 
 Plugin 'spf13/spf13-vim'
-
+Plugin 'avakhov/vim-yaml'
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-sensible'
 " All of your Plugins must be added before the following line
@@ -67,3 +67,6 @@ map gd :bd<cr>
 
 " show linenumbers
 set number
+
+" search for visual selection
+vnoremap // y/<C-R>"<CR>
