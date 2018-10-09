@@ -4,7 +4,7 @@ set -euo pipefail
 
 dotfiles_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 olddir=~/dotfiles_old
-files="bashrc vimrc fonts.conf tmux.conf"    # list of files/folders to symlink in homedir
+files="bashrc vimrc fonts.conf tmux.conf toprc"    # list of files/folders to symlink in homedir
 
 echo "Creating $olddir for backup of any existing dotfiles in ~"
 mkdir -p $olddir
