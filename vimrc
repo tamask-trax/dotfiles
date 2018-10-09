@@ -139,3 +139,9 @@ set autoread
 
 " Bind paste toggle to F2
 set pastetoggle=<F2>
+
+noremap <F9> :w <bar> :!%:p<CR>
+
+" set search highlight color
+hi Search cterm=NONE ctermfg=Black ctermbg=Cyan
+hi Visual cterm=bold ctermbg=White ctermfg=NONE
