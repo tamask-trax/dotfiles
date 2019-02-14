@@ -19,6 +19,7 @@ Plugin 'scrooloose/nerdtree'
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
 Plugin 'Vimjas/vim-python-pep8-indent'
+Plugin 'flazz/vim-colorschemes'
 
 " git repos on your local machine (i.e. when working on your own plugin)
 "Plugin 'file:///home/gmarik/path/to/plugin'
@@ -145,3 +146,6 @@ noremap <F9> :w <bar> :!%:p<CR>
 " set search highlight color
 hi Search cterm=NONE ctermfg=Black ctermbg=Cyan
 hi Visual cterm=bold ctermbg=White ctermfg=NONE
+
+" set colorscheme to molokai
+colorscheme molokai
