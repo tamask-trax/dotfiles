@@ -148,4 +148,4 @@ hi Search cterm=NONE ctermfg=Black ctermbg=Cyan
 hi Visual cterm=bold ctermbg=White ctermfg=NONE
 
 " set colorscheme to molokai
-colorscheme molokai
+colorscheme mustang
